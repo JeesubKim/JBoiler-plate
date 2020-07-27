@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const config = require('../config/key');
+const UserSchema = require('./User');
 class MongoDBManager{
 
     constructor(){
@@ -7,14 +8,19 @@ class MongoDBManager{
         this.db.on('error',console.error);
         this.db.once('open',()=>{
             console.log("mongodb connected");
+            
         })
-        mongoose.set("useCreateIndex",true);
     }
 
     connect(){
+        
         mongoose.connect(config.mongoDBPath,{ useNewUrlParser: true,  useUnifiedTopology: true ,useCreateIndex:true,useFindAndModify:false});
     }
+    find(keyword,callback){
+        console.log("find");
+        return UserSchema.find(keyword);
 
+    }
 }
 
 module.exports = MongoDBManager;
