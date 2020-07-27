@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-
+const mongoose = require('mongoose');
+const config = require('../config/key');
 class MongoDBManager{
 
     constructor(){
@@ -12,7 +12,7 @@ class MongoDBManager{
     }
 
     connect(){
-        mongoose.connect('mongodb://localhost/mongodb_JBoiler_plate',{ useNewUrlParser: true,  useUnifiedTopology: true });
+        mongoose.connect(config.mongoDBPath,{ useNewUrlParser: true,  useUnifiedTopology: true ,useCreateIndex:true,useFindAndModify:false});
     }
 
 }
