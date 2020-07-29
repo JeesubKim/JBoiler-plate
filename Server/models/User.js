@@ -78,7 +78,34 @@ userSchema.method('generateToken',function(callback){
         if(err)callback(err);
         callback(null,user);
     })
-})
+});
+userSchema.statics.findByToken =function(token, callback){
+    var user = this;
+
+    //Decode token here
+    jwt.verify(token, 'secretToken',function(err,decoded){
+        if (err) return callback(err);
+        //User를 찾은 후 db상의 token과 현재 token이 일치하는지 확인
+        user.findOne({"_id":decoded,"token":token},function(err,user){
+            if(err)return callback(err);
+            callback(null,user);
+        })
+    })
+}
+
+// userSchema.method('findByToken',function(token, callback){
+//     var user = this;
+
+//     //Decode token here
+//     jwt.verify(token, 'secretToken',function(err,decoded){
+//         if (err) return callback(err);
+//         //User를 찾은 후 db상의 token과 현재 token이 일치하는지 확인
+//         user.findOne({"_id":decoded,"token":token},function(err,user){
+//             if(err)return callback(err);
+//             callback(null,user);
+//         })
+//     })
+// });
 const User = mongoose.model('User',userSchema);
 
 module.exports= User;

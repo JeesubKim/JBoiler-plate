@@ -6,7 +6,7 @@ const port = 5000
 const User = require("./models/User");
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-
+const auth = require('./middleware/auth')
 
 const mongodb = new MongoDBManager();
 mongodb.connect();
@@ -22,7 +22,7 @@ app.get("/", (req,res)=> res.send("Hello JBoilerPlate!"));
 
 
 //화원 가입을 위한 router
-app.post("/register",(req,res)=>{    
+app.post("/api/v1/users/register",(req,res)=>{    
     //회원가입시 필요한 정보를 client에서 가져와서 DB에 넣어주기
     const user = new User(req.body);
     
@@ -67,4 +67,17 @@ app.post('/login',(req,res)=>{
     })
 
 });
+
+
+app.get('/api/v1/users/auth', auth, (req,res)=>{ //auth --> middleware
+
+    res.status(200).json({
+        _id:req.user._id,
+        isAdmin:req.user.role === 0 ? true : false,
+        institution:req.user.institution,
+        email:req.user.email,
+        firstname:req.user.firstname,
+        lastname:req.user.lastname
+    })
+})
 app.listen(port,()=>console.log("Started"));
