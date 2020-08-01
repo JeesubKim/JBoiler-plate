@@ -92,5 +92,8 @@ app.get('/api/v1/users/logout',auth,(req,res)=>{
     })
 })
 
+app.get('/api/test/CORP',(req,res)=>{
+    res.send("api/test/corp TEST")
+})
 
 app.listen(port,()=>console.log("Started"));
