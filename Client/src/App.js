@@ -1,3 +1,5 @@
+
+//Routing 관련 처리
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
