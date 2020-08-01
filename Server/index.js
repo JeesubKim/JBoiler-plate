@@ -77,7 +77,20 @@ app.get('/api/v1/users/auth', auth, (req,res)=>{ //auth --> middleware
         institution:req.user.institution,
         email:req.user.email,
         firstname:req.user.firstname,
-        lastname:req.user.lastname
+        lastname:req.user.lastname,
+        image:req.usere.image
     })
 })
+
+
+app.get('/api/v1/users/logout',auth,(req,res)=>{
+    User.findOneAndUpdate({_id: req.user._id},{token:""},(err,user)=>{
+        if(err) return res.json({success:false,err});
+        return res.res.status(200).send({
+            success:true
+        })
+    })
+})
+
+
 app.listen(port,()=>console.log("Started"));
