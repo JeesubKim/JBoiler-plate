@@ -35,7 +35,7 @@ app.post("/api/v1/users/register",(req,res)=>{
 })
 
 
-app.post('/login',(req,res)=>{
+app.post('/api/v1/users/login',(req,res)=>{
 
     //1.DB에서 email 찾기
     User.findOne({email:req.body.email},function(err,user){
