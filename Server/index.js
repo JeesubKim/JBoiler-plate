@@ -84,9 +84,10 @@ app.get('/api/v1/users/auth', auth, (req,res)=>{ //auth --> middleware
 
 
 app.get('/api/v1/users/logout',auth,(req,res)=>{
+    console.log("logout request");
     User.findOneAndUpdate({_id: req.user._id},{token:""},(err,user)=>{
         if(err) return res.json({success:false,err});
-        return res.res.status(200).send({
+        return res.status(200).send({
             success:true
         })
     })
