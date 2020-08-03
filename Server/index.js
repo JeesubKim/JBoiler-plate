@@ -74,11 +74,12 @@ app.get('/api/v1/users/auth', auth, (req,res)=>{ //auth --> middleware
     res.status(200).json({
         _id:req.user._id,
         isAdmin:req.user.role === 0 ? true : false,
+        isAuth:true,
         institution:req.user.institution,
         email:req.user.email,
         firstname:req.user.firstname,
         lastname:req.user.lastname,
-        image:req.usere.image
+        image:req.user.image
     })
 })
 

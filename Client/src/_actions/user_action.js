@@ -1,7 +1,8 @@
 import Axios from 'axios'
 import {
     LOGIN_USER,
-    REGISTER_USER
+    REGISTER_USER,
+    AUTH_USER
 } from './types'
 
 export function loginUser(dataToSubmit) {
@@ -30,3 +31,18 @@ export function registerUser(dataToSubmit) {
         payload:request
     }
 }
+
+
+export function auth(dataToSubmit) {
+    const request = Axios.get('/api/v1/users/auth')
+    .then(resp=>{
+        return resp.data;
+    })
+
+
+    return {
+        type:AUTH_USER,
+        payload:request
+    }
+}
+

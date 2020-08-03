@@ -73,7 +73,16 @@ userSchema.method('comparePassword',function(plainPassword, callback){
 
 userSchema.method('generateToken',function(callback){
     let user = this;
-    user.token = jwt.sign(user._id.toHexString(),'secretToken');
+    user.token = jwt.sign(user._id.toHexString(),'secretToken'
+    // ,{},function(err, decoded){
+    //     if(err) {
+    //         console.log("Error failed: " + err);
+    //         return;
+    //     }
+    //     console.log("decoded");
+    //     console.log(decoded);
+    //     }
+        );
     user.save(function(err,user){
         if(err)callback(err);
         callback(null,user);

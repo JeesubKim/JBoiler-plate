@@ -1,6 +1,7 @@
 import {
     LOGIN_USER,
-    REGISTER_USER
+    REGISTER_USER,
+    AUTH_USER
 } from '../_actions/types'
 
 export default function(previousState={}, action) {
@@ -12,6 +13,9 @@ export default function(previousState={}, action) {
             
         case REGISTER_USER:
             return {...previousState, register:action.payload}
+
+        case AUTH_USER:
+            return {...previousState, userData:action.payload};
         default:
             return previousState;
     }
